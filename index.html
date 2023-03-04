@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<div>
+			<b>马具:&nbsp;&nbsp;</b>
+			首饰
+			<select id = "head">
+			  <option value ="0">无</option>
+			  <option value ="6">6%</option>
+			  <option value ="5">5%</option>
+			  <option value ="4">4%</option>
+			  <option value ="3">3%</option>
+			</select>&nbsp;
+			鞍饰
+			<select id = "body">
+			  <option value ="0">无</option>
+			  <option value ="6">6%</option>
+			  <option value ="5">5%</option>
+			  <option value ="4">4%</option>
+			  <option value ="3">3%</option>
+			</select>&nbsp;
+			腿饰
+			<select id = "leg">
+			  <option value ="0">无</option>
+			  <option value ="6">6%</option>
+			  <option value ="5">5%</option>
+			  <option value ="4">4%</option>
+			  <option value ="3">3%</option>
+			</select>&nbsp;
+			马饰
+			<select id = "show">
+			  <option value ="0">无</option>
+			  <option value ="6">6%</option>
+			  <option value ="5">5%</option>
+			  <option value ="4">4%</option>
+			  <option value ="3">3%</option>
+			</select>
+		</div>
+		<br />
+		<div>
+			<b>马匹属性:&nbsp;&nbsp;</b>
+			基础马速
+			<select id = "masu">
+			  <option value ="0">无</option>
+			  <option value ="105">105%</option>
+			  <option value ="110">110%</option>
+			  <option value ="115">115%</option>
+			  <option value ="120">120%</option>
+			</select>&nbsp;&nbsp;&nbsp;
+			劲足等级
+			<select id = "jinzu">
+			  <option value ="0">无</option>
+			  <option value ="14">6级</option>
+			  <option value ="16">7级</option>
+			  <option value ="18">8级</option>
+			</select>&nbsp;
+		</div>
+		<br />
+		<div>
+			<b>人物属性:&nbsp;&nbsp;</b>
+			战阶等级
+			<select id = "zhanjie">
+			  <option value ="0">8阶以下</option>
+			  <option value ="1">8阶</option>
+			  <option value ="1">9阶</option>
+			  <option value ="2">10阶</option>
+			  <option value ="2">11阶</option>
+			  <option value ="2">12阶</option>
+			  <option value ="2">13阶</option>
+			  <option value ="5">14阶</option>
+			</select>&nbsp;&nbsp;&nbsp;
+			鞋子移速附魔
+			<select id = "fumo">
+			  <option value ="0">无</option>
+			  <option value ="5.47">有</option>
+		    </select>&nbsp;
+			武器移速五彩石
+			<select id = "shitou">
+			  <option value ="0">无</option>
+			  <option value ="8">有</option>
+			</select>&nbsp;
+		</div>
+		<br/>
+		<div>
+			<button id="suan" onclick="jisuan()">计算</button>
+		</div>
+		<br/>
+		<div>
+			<h1>上马跑速为：</h1><h1 id = "jielun"></h1>
+			<h1 id = "jianyi"></h1>
+		</div>
+
+		<script type="text/javascript">
+			function jisuan(){
+				var tou = parseFloat(document.getElementById("head").options[document.getElementById("head").selectedIndex].value);
+				var xiong = parseFloat(document.getElementById("body").options[document.getElementById("body").selectedIndex].value);
+				var jiao = parseFloat(document.getElementById("leg").options[document.getElementById("leg").selectedIndex].value);
+				var shi = parseFloat(document.getElementById("show").options[document.getElementById("show").selectedIndex].value);
+				var ma = parseFloat(document.getElementById("masu").options[document.getElementById("masu").selectedIndex].value);
+				var jinzu = parseFloat(document.getElementById("jinzu").options[document.getElementById("jinzu").selectedIndex].value);
+				var zhanjie = parseFloat(document.getElementById("zhanjie").options[document.getElementById("zhanjie").selectedIndex].value);
+				var fumo = parseFloat(document.getElementById("fumo").options[document.getElementById("fumo").selectedIndex].value);
+				var shitou = parseFloat(document.getElementById("shitou").options[document.getElementById("shitou").selectedIndex].value);
+				var jiacheng = shitou+fumo+zhanjie+jinzu+ma+shi+jiao+xiong+tou;
+				var yisu = (20*jiacheng/100+20).toFixed(3);
+				var yisu2 = 20*jiacheng/100+20;
+				if(yisu == 20){
+					var h1 = document.getElementById('jielun');
+					h1.innerHTML = yisu;
+				}else{
+					if(yisu2%1==0){
+						var jieguo = yisu-1 
+						var h1 = document.getElementById('jielun');
+						var h2 = document.getElementById('jianyi');
+						h1.innerHTML = jieguo;
+						h2.innerHTML = "理论跑速为"+yisu+"整,建议给鞋子附魔可使跑速+2，或提高1%跑速可使跑速+1"
+						
+					}else{
+						var yisu1 = parseInt(yisu2);
+						var h1 = document.getElementById('jielun');
+						var h2 = document.getElementById('jianyi');
+						h1.innerHTML = yisu1;
+						var xiaoshu = parseFloat("0."+(yisu2 + "").split(".")[1]);
+						debugger;
+						var chaju = 1-xiaoshu;
+						var chaju2 = parseInt((chaju*5)+1);
+						
+						if(chaju2<5){
+							if(chaju2==1){
+								if(fumo==0){
+									h2.innerHTML = "理论跑速为"+yisu+",建议提高2%跑速可使跑速+1";
+								}else{
+									h2.innerHTML = "理论跑速为"+yisu+",建议提高1%跑速可使跑速+1";
+								}
+							}else{
+								h2.innerHTML = "理论跑速为"+yisu+",建议提高"+chaju2+"%跑速可使跑速+1";
+							}
+						}else{
+							h2.innerHTML = "理论跑速为"+yisu;
+						}
+						
+					}
+				}
+			}
+		</script> 
+	</body>
+</html>
